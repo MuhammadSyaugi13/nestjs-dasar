@@ -21,4 +21,16 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+
+  it('should can say hello in getAsync', async () => {
+    const result = await request(app.getHttpServer())
+      .get('/user/async-method')
+      .query({
+        name: "Ogi"
+      })
+
+    expect(result.status).toBe(200)
+    expect(result.text).toBe('hello Ogi, anda sedang mencoba async method')
+  })
+  // /async-method (GET)
 });
