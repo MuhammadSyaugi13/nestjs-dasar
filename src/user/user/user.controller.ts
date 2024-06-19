@@ -70,7 +70,7 @@ export class UserController {
     async getAsync(@Query('name') name):Promise<string>  {
 
         /* dengan menggunakan user servicec*/ 
-        return this.service.sayHello('Ogi')
+        return this.service.sayHello(name)
 
         /* tanpa user service */
         // name = name ? name : 'guys'

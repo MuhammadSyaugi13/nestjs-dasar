@@ -11,6 +11,7 @@ import { Connection, MySqlConnection, MongoDbConnection } from './user/connectio
 import { BarangModule } from './barang/barang.module';
 import { WinstonModule } from 'nest-winston';
 import { json } from 'stream/consumers';
+import { ValidationModule } from './validation/validation.module';
 import * as winston from "winston";
 
 
@@ -27,7 +28,8 @@ import * as winston from "winston";
       format: winston.format.json(),
       level: 'debug',
       transports: [new winston.transports.Console()]
-    })
+    }),
+    ValidationModule.forRoot(true)
   ],
   controllers: [AppController],
   providers: [AppService],
