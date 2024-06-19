@@ -8,6 +8,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UserRepository } from './user/user-repository/user-repository';
 import { UserModule } from './user/user.module';
 import { Connection, MySqlConnection, MongoDbConnection } from './user/connection/connection';
+import { BarangModule } from './barang/barang.module';
+
 
 
 @Module({
@@ -17,6 +19,7 @@ import { Connection, MySqlConnection, MongoDbConnection } from './user/connectio
     }),
     PrismaModule,
     UserModule,
+    BarangModule,
   ],
   controllers: [AppController],
   providers: [AppService],

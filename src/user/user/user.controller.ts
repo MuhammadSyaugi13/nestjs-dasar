@@ -147,16 +147,6 @@ export class UserController {
         return this.userRepository.save(name, lastName)
 
     }
-
-    @Get('/barang')
-    async createBarang(
-        @Query('name') name:string, 
-        @Query('price') price:string
-        ): Promise<Barang>
-    {
-        return this.userRepository.saveBarang(name, parseInt(price))
-
-    }
     /*  ./ database with prisma*/ 
 
 
