@@ -9,6 +9,9 @@ import { UserRepository } from './user/user-repository/user-repository';
 import { UserModule } from './user/user.module';
 import { Connection, MySqlConnection, MongoDbConnection } from './user/connection/connection';
 import { BarangModule } from './barang/barang.module';
+import { WinstonModule } from 'nest-winston';
+import { json } from 'stream/consumers';
+import * as winston from "winston";
 
 
 
@@ -20,6 +23,11 @@ import { BarangModule } from './barang/barang.module';
     PrismaModule,
     UserModule,
     BarangModule,
+    WinstonModule.forRoot({
+      format: winston.format.json(),
+      level: 'debug',
+      transports: [new winston.transports.Console()]
+    })
   ],
   controllers: [AppController],
   providers: [AppService],

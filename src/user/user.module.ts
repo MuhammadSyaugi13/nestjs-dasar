@@ -9,7 +9,6 @@ import { PznUserRepository, createPznUserRepository } from './user-repository/pz
 import { MemberService } from './member/member.service';
 
 @Module({
-    imports: [PrismaModule,],
     controllers: [UserController],
     providers: [
         UserRepository,

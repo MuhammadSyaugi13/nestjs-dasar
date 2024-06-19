@@ -4,7 +4,7 @@ import { PrismaModule } from 'src/prisma/prisma.module';
 import { BarangRepository } from './barang-repository/barang-repository';
 
 @Module({
-    imports: [PrismaModule],
+    // imports: [PrismaModule],
     controllers: [BarangController],
     providers: [BarangRepository]
 
