@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 // import { UserService } from './user/user.service';
@@ -13,6 +13,7 @@ import { WinstonModule } from 'nest-winston';
 import { json } from 'stream/consumers';
 import { ValidationModule } from './validation/validation.module';
 import * as winston from "winston";
+import { LogMiddleware } from './log/log.middleware';
 
 
 
@@ -34,4 +35,12 @@ import * as winston from "winston";
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LogMiddleware).forRoutes({
+      path: '/user/*',
+      method: RequestMethod.ALL
+    })
+  }
+  
+}
