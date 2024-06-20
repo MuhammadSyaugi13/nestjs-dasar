@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpRedirectResponse, Param, Post, Query, Redirect, Res, Req, Inject } from '@nestjs/common';
+import { Body, Controller, Get, HttpRedirectResponse, Param, Post, Query, Redirect, Res, Req, Inject, UseFilters, HttpException } from '@nestjs/common';
 import { CreateUserDto } from './../dto/create-user.dto';
 import { Request, Response, response } from 'express';
 import { UserService } from './user.service';
@@ -8,6 +8,7 @@ import { Connection } from './../connection/connection';
 import { MailService } from '../mail/mail.service';
 import { PznUserRepository } from '../user-repository/pzn-user-repository';
 import { MemberService } from '../member/member.service';
+import { ValidationFilter } from 'src/validation/validation.filter';
 
 @Controller('user')
 export class UserController {
@@ -67,6 +68,7 @@ export class UserController {
     /* async method*/ 
 
     @Get('/async-method')
+    // @UseFilters(ValidationFilter)
     async getAsync(@Query('name') name):Promise<string>  {
 
         /* dengan menggunakan user servicec*/ 
@@ -144,6 +146,12 @@ export class UserController {
         @Query('last_name') lastName:string
         ): Promise<User>
     {
+        if(!name){
+            throw new HttpException({
+                code: 400,
+                errors: 'name is required'
+            }, 400)
+        }
         return this.userRepository.save(name, lastName)
 
     }

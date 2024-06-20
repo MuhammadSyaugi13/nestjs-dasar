@@ -4,6 +4,7 @@ import * as cookieParser from 'cookie-parser';
 import * as mustache from 'mustache-express'
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { ValidationFilter } from './validation/validation.filter';
 
 async function bootstrap() {
 
@@ -18,6 +19,7 @@ async function bootstrap() {
   app.set('view-engine', 'html')
   app.engine('html', mustache())
 
+  app.useGlobalFilters(new ValidationFilter())
 
   await app.listen(3000);
 }
